@@ -69,5 +69,5 @@ modules:
       - install -Dm644 ${FLATPAK_DEST}/formatlab/share/metainfo/com.warlordsoftwares.formatlab.metainfo.xml ${FLATPAK_DEST}/share/metainfo/com.warlordsoftwares.formatlab.metainfo.xml
     sources:
       - type: archive
-        url: https://warlordsoftwares.com/static/app_builds/flatpak/FLATPAK_FORMAT_LAB-2024.2.20.tar.gz
-        sha256: 99e5bb74b421b089c08b5fe3a9cfe547c8a847850c49ccb6c463d5fb54bc9f6e
+        url: https://warlordsoftwares.com/static/app_builds/flatpak/FLATPAK_FORMAT_LAB-2024.3.12.tar.gz
+        sha256: 9483972159baa78f7a2e0df4d093ad588a3c4988cc5f7ddd4f5827f6852b17d0

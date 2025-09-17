@@ -30,7 +30,7 @@ finish-args:
 
   - --filesystem=xdg-run/gvfs
   - --filesystem=xdg-run/gvfsd
-  - --talk-name=org.gtk.vfs.*
+  - --talk-name=org.gtk.vfs.Daemon
 
 cleanup-commands:
   - /app/cleanup-BaseApp.sh

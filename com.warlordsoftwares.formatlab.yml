@@ -19,11 +19,10 @@ finish-args:
   - --socket=wayland
   - --socket=pulseaudio
   - --device=dri
-#  - --filesystem=xdg-download
-#  - --filesystem=xdg-documents
-#  - --filesystem=xdg-music
-#  - --filesystem=xdg-videos
-  - --filesystem=home
+  - --filesystem=xdg-download
+  - --filesystem=xdg-documents
+  - --filesystem=xdg-music
+  - --filesystem=xdg-videos
   - --filesystem=/media
   - --filesystem=/run/media
   - --filesystem=xdg-run/gvfs

@@ -27,7 +27,7 @@ finish-args:
   - --filesystem=/run/media
   - --filesystem=xdg-run/gvfs
   - --filesystem=xdg-run/gvfsd
-  - --talk-name=org.gtk.vfs.Daemon
+  - --talk-name=org.gtk.vfs.*
 
 cleanup-commands:
   - /app/cleanup-BaseApp.sh

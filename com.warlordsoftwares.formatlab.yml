@@ -17,11 +17,16 @@ finish-args:
   - --share=ipc
   - --socket=fallback-x11
   - --socket=wayland
-  - --filesystem=xdg-download
-  - --filesystem=xdg-documents
-  - --filesystem=xdg-run/gvfsd
+  - --filesystem=home
   - --device=dri
   - --socket=pulseaudio
+  - --filesystem=/run/media
+  - --filesystem=/media
+  - --filesystem=xdg-run/gvfs
+  - --filesystem=xdg-run/gvfsd
+  - --talk-name=org.gtk.vfs.*
+  - --system-talk-name=org.freedesktop.login1
+  - --system-talk-name=org.freedesktop.UPower
 
 cleanup-commands:
   - /app/cleanup-BaseApp.sh
@@ -62,4 +67,4 @@ modules:
     sources:
       - type: archive
         url: https://warlordsoftwares.com/static/app_builds/flatpak/FLATPAK_FORMAT_LAB.tar.gz
-        sha256: 34646cc8ae3c58e77f221b24e3c80c2dabdd2d21d1eb97282a48838bad5c94e9
+        sha256: f95cf574ebb34a66455aff9534cf0b6b612d14a88cc6f244dd9e846a6b15240f

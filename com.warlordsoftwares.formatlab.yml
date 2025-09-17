@@ -1,15 +1,17 @@
 app-id: com.warlordsoftwares.formatlab
 runtime: org.kde.Platform
-runtime-version: 5.15-23.08
+runtime-version: 5.15-24.08
 sdk: org.kde.Sdk
 base: com.riverbankcomputing.PyQt.BaseApp
-base-version: '5.15-23.08'
-cleanup-commands:
-  - /app/cleanup-BaseApp.sh
+base-version: '5.15-24.08'
+command: formatlab.sh
 build-options:
   env:
     - BASEAPP_REMOVE_WEBENGINE=1
-command: formatlab.sh
+
+tags:
+  - proprietary
+
 finish-args:
   - --share=network
   - --share=ipc
@@ -20,11 +22,14 @@ finish-args:
   - --filesystem=xdg-run/gvfsd
   - --device=dri
   - --socket=pulseaudio
-tags:
-  - proprietary
+
+cleanup-commands:
+  - /app/cleanup-BaseApp.sh
+
 cleanup:
   - /include
   - /lib/pkgconfig
+
 modules:
   - name: libass
     sources:
@@ -41,6 +46,7 @@ modules:
       - /share
       - '*.a'
       - '*.la'
+
   - name: luajit
     no-autogen: true
     make-install-args:
@@ -54,9 +60,11 @@ modules:
       - type: git
         url: https://github.com/LuaJIT/LuaJIT.git
         commit: 4c2441c16ce3c4e312aaefecc6d40c4fe21de97c
+
   - ffmpeg.json
   - mpv.json
   - python3-req.json
+
   - name: formatlab
     buildsystem: simple
     build-commands:
@@ -69,5 +77,5 @@ modules:
       - install -Dm644 ${FLATPAK_DEST}/formatlab/share/metainfo/com.warlordsoftwares.formatlab.metainfo.xml ${FLATPAK_DEST}/share/metainfo/com.warlordsoftwares.formatlab.metainfo.xml
     sources:
       - type: archive
-        url: https://warlordsoftwares.com/static/app_builds/flatpak/FLATPAK_FORMAT_LAB-2024.12.1.tar.gz
-        sha256: 3e87145df18bcfd783a5ff57f5f288d3c99953a9349d3c8bf5cd0220335c7bfa
+        url: https://warlordsoftwares.com/static/app_builds/flatpak/FLATPAK_FORMAT_LAB.tar.gz
+        sha256: 34646cc8ae3c58e77f221b24e3c80c2dabdd2d21d1eb97282a48838bad5c94e9

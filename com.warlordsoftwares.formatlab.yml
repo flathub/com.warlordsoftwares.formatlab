@@ -18,7 +18,7 @@ finish-args:
   - --socket=fallback-x11
   - --socket=wayland
   - --socket=pulseaudio
-  - --device=dri
+  - --device=all
   - --filesystem=xdg-download
   - --filesystem=xdg-documents
   - --filesystem=xdg-music
@@ -51,7 +51,7 @@ modules:
         url: https://github.com/LuaJIT/LuaJIT.git
         commit: 4c2441c16ce3c4e312aaefecc6d40c4fe21de97c
 
-  - ffmpeg_mpv.json
+  - formatlab_ffmpeg.json
   - mpv.json
   - python3-req.json
 

@@ -75,12 +75,12 @@
             "/share/ffmpeg/examples"
           ],
           "config-opts": [
-            "--enable-shared",
             "--disable-static",
             "--disable-debug",
-            "--enable-gnutls",
             "--disable-doc",
             "--disable-ffplay",
+            "--enable-gnutls",
+            "--enable-shared",
             "--enable-gpl",
             "--enable-libass",
             "--enable-libfribidi",
@@ -92,7 +92,15 @@
             "--enable-libx264",
             "--enable-libx265",
             "--enable-libxvid",
-            "--enable-libopus"
+            "--enable-libopus",
+            "--enable-vaapi",
+            "--enable-libdrm",
+            "--enable-amf",
+            "--enable-libvulkan",
+            "--enable-cuda-nvcc",
+            "--enable-cuvid",
+            "--enable-nvenc",
+            "--enable-libmfx"
           ],
           "build-options": {
             "arch": {

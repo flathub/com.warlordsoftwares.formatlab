@@ -46,24 +46,6 @@
   ],
   "modules": [
     {
-      "name": "ffnvcodec",
-      "only-arches": [
-        "x86_64"
-      ],
-      "buildsystem": "simple",
-      "build-commands": [
-        "make",
-        "make install PREFIX=${FLATPAK_DEST}"
-      ],
-      "sources": [
-        {
-          "type": "archive",
-          "url": "https://github.com/FFmpeg/nv-codec-headers/releases/download/n12.1.14.0/nv-codec-headers-12.1.14.0.tar.gz",
-          "sha256": "62b30ab37e4e9be0d0c5b37b8fee4b094e38e570984d56e1135a6b6c2c164c9f"
-        }
-      ]
-    },
-    {
       "name": "xvid",
       "subdir": "build/generic",
       "sources": [
@@ -482,29 +464,150 @@
     },
     {
       "name": "mpv",
-      "buildsystem": "simple",
-      "build-commands": [
-        "python3 waf configure --disable-alsa --disable-build-date --disable-manpage-build --prefix=/app",
-        "python3 waf build",
-        "python3 waf install"
+      "buildsystem": "meson",
+      "config-opts": [
+        "-Dbuild-date=false",
+        "-Dlibmpv=true",
+        "-Dcplayer=false",
+        "-Dmanpage-build=disabled"
       ],
       "sources": [
         {
           "type": "archive",
-          "url": "https://github.com/mpv-player/mpv/archive/v0.34.1.tar.gz",
-          "sha256": "32ded8c13b6398310fa27767378193dc1db6d78b006b70dbcbd3123a1445e746"
-        },
-        {
-          "type": "file",
-          "url": "https://waf.io/waf-2.0.23",
-          "sha256": "28a2e4583314a162cfcbffefb8a9202c1d7869040d30b5852da479b76d9c0491",
-          "dest-filename": "waf"
+          "url": "https://github.com/mpv-player/mpv/archive/v0.40.0.tar.gz",
+          "sha256": "10a0f4654f62140a6dd4d380dcf0bbdbdcf6e697556863dc499c296182f081a3",
+          "x-checker-data": {
+            "type": "anitya",
+            "project-id": 5348,
+            "stable-only": true,
+            "url-template": "https://github.com/mpv-player/mpv/archive/v$version.tar.gz"
+          }
         }
       ],
-      "cleanup": [
-        "/include",
-        "/lib/pkgconfig",
-        "/share"
+      "modules": [
+        {
+          "name": "libplacebo",
+          "buildsystem": "meson",
+          "config-opts": [
+            "-Dd3d11=disabled",
+            "-Ddemos=False"
+          ],
+          "sources": [
+            {
+              "type": "archive",
+              "url": "https://code.videolan.org/videolan/libplacebo/-/archive/v7.349.0/libplacebo-v7.349.0.tar.gz",
+              "sha256": "79120e685a1836344b51b13b6a5661622486a84e4d4a35f6c8d01679a20fbc86"
+            },
+            {
+              "type": "archive",
+              "url": "https://github.com/pallets/markupsafe/archive/refs/tags/3.0.2.tar.gz",
+              "sha256": "cd182103704bfafefce25369fd27f14a5f578f078b7f3ddd1ce2cb940b86403a",
+              "x-checker-data": {
+                "type": "anitya",
+                "project-id": 3918,
+                "stable-only": true,
+                "url-template": "https://github.com/pallets/markupsafe/archive/refs/tags/$version.tar.gz"
+              },
+              "dest": "3rdparty/markupsafe"
+            },
+            {
+              "type": "archive",
+              "url": "https://github.com/pallets/jinja/archive/refs/tags/3.1.6.tar.gz",
+              "sha256": "2074b22a72caa65474902234b320d73463d6d4c223ee49f4b433495758356337",
+              "x-checker-data": {
+                "type": "anitya",
+                "project-id": 3894,
+                "stable-only": true,
+                "url-template": "https://github.com/pallets/jinja/archive/refs/tags/$version.tar.gz"
+              },
+              "dest": "3rdparty/jinja"
+            },
+            {
+              "type": "archive",
+              "url": "https://github.com/Dav1dde/glad/archive/refs/tags/v2.0.8.tar.gz",
+              "sha256": "44f06f9195427c7017f5028d0894f57eb216b0a8f7c4eda7ce883732aeb2d0fc",
+              "x-checker-data": {
+                "type": "anitya",
+                "project-id": 300234,
+                "stable-only": true,
+                "url-template": "https://github.com/Dav1dde/glad/archive/refs/tags/v$version.tar.gz"
+              },
+              "dest": "3rdparty/glad"
+            }
+          ],
+          "modules": [
+            {
+              "name": "glslang",
+              "buildsystem": "cmake-ninja",
+              "config-opts": [
+                "-DCMAKE_BUILD_TYPE=Release",
+                "-DBUILD_SHARED_LIBS=ON"
+              ],
+              "cleanup": [
+                "/bin"
+              ],
+              "sources": [
+                {
+                  "type": "archive",
+                  "url": "https://github.com/KhronosGroup/glslang/archive/15.4.0.tar.gz",
+                  "sha256": "b16c78e7604b9be9f546ee35ad8b6db6f39bbbbfb19e8d038b6fe2ea5bba4ff4",
+                  "x-checker-data": {
+                    "type": "anitya",
+                    "project-id": 205796,
+                    "stable-only": true,
+                    "url-template": "https://github.com/KhronosGroup/glslang/archive/$version.tar.gz"
+                  }
+                },
+                {
+                  "type": "archive",
+                  "url": "https://github.com/KhronosGroup/SPIRV-Tools/archive/refs/tags/vulkan-sdk-1.4.313.0.tar.gz",
+                  "sha256": "6b60f723345ceed5291cceebbcfacf7fea9361a69332261fa08ae57e2a562005",
+                  "dest": "External/spirv-tools"
+                },
+                {
+                  "type": "archive",
+                  "url": "https://github.com/KhronosGroup/SPIRV-Headers/archive/refs/tags/vulkan-sdk-1.4.313.0.tar.gz",
+                  "sha256": "f68be549d74afb61600a1e3a7d1da1e6b7437758c8e77d664909f88f302c5ac1",
+                  "dest": "External/spirv-tools/external/spirv-headers"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "libXmu",
+          "buildsystem": "autotools",
+          "sources": [
+            {
+              "type": "archive",
+              "url": "https://xorg.freedesktop.org/releases/individual/lib/libXmu-1.2.1.tar.xz",
+              "sha256": "fcb27793248a39e5fcc5b9c4aec40cc0734b3ca76aac3d7d1c264e7f7e14e8b2",
+              "x-checker-data": {
+                "type": "anitya",
+                "project-id": 1785,
+                "stable-only": true,
+                "url-template": "https://xorg.freedesktop.org/releases/individual/lib/libXmu-$version.tar.xz"
+              }
+            }
+          ]
+        },
+        {
+          "name": "libXpresent",
+          "buildsystem": "autotools",
+          "sources": [
+            {
+              "type": "archive",
+              "url": "https://xorg.freedesktop.org/archive/individual/lib/libXpresent-1.0.2.tar.xz",
+              "sha256": "4e5b21b4812206a4b223013606ae31170502c1043038777a1ef8f70c09d37602",
+              "x-checker-data": {
+                "type": "anitya",
+                "project-id": 17166,
+                "stable-only": true,
+                "url-template": "https://xorg.freedesktop.org/archive/individual/lib/libXpresent-$version.tar.xz"
+              }
+            }
+          ]
+        }
       ]
     },
     {

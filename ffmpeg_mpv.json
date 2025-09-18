@@ -91,7 +91,8 @@
             "--enable-libvpx",
             "--enable-libx264",
             "--enable-libx265",
-            "--enable-libxvid"
+            "--enable-libxvid",
+            "--enable-libopus"
           ],
           "build-options": {
             "arch": {

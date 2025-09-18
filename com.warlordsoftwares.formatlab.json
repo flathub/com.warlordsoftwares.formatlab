@@ -314,7 +314,6 @@
         "--enable-libpulse",
         "--enable-librsvg",
         "--enable-libsvtav1",
-        "--enable-libv4l2",
         "--enable-libxml2",
         "--enable-libzimg",
         "--enable-nvdec",

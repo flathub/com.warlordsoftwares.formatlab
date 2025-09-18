@@ -282,6 +282,10 @@
         }
       ]
     },
+
+
+
+  ,
     {
       "name": "ffmpeg",
       "config-opts": [
@@ -289,40 +293,44 @@
         "--disable-debug",
         "--disable-doc",
         "--disable-ffplay",
+        "--enable-shared",
+        "--enable-gnutls",
+        "--enable-gpl",
+        "--enable-libass",
+        "--enable-libfribidi",
+        "--enable-libmp3lame",
+        "--enable-libpulse",
+        "--enable-libtheora",
+        "--enable-libvorbis",
+        "--enable-libvpx",
+        "--enable-libx264",
+        "--enable-libx265",
+        "--enable-libxvid",
+
         "--enable-amf",
         "--enable-cuda-llvm",
         "--enable-cuvid",
         "--enable-ffnvcodec",
-        "--enable-gnutls",
-        "--enable-gpl",
         "--enable-libaom",
-        "--enable-libass",
         "--enable-libdav1d",
         "--enable-libfontconfig",
         "--enable-libfreetype",
-        "--enable-libmp3lame",
         "--enable-libopenjpeg",
         "--enable-libopus",
         "--enable-libpulse",
         "--enable-librsvg",
         "--enable-libsvtav1",
         "--enable-libv4l2",
-        "--enable-libvorbis",
-        "--enable-libvpx",
-        "--enable-libx264",
-        "--enable-libx265",
         "--enable-libxml2",
         "--enable-libzimg",
         "--enable-nvdec",
         "--enable-nvenc",
         "--enable-opencl",
         "--enable-rpath",
-        "--enable-shared",
         "--enable-vaapi",
         "--enable-vdpau",
         "--enable-libdrm",
-        "--enable-libwebp",
-        "--enable-libxvid"
+        "--enable-libwebp"
       ],
       "build-options": {
         "prepend-path": "/usr/lib/sdk/llvm19/bin",

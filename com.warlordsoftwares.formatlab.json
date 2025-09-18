@@ -303,7 +303,6 @@
         "--enable-libx265",
         "--enable-libxvid",
         "--enable-amf",
-        "--enable-cuda-llvm",
         "--enable-cuvid",
         "--enable-ffnvcodec",
         "--enable-libaom",

@@ -282,10 +282,6 @@
         }
       ]
     },
-
-
-
-  ,
     {
       "name": "ffmpeg",
       "config-opts": [
@@ -306,7 +302,6 @@
         "--enable-libx264",
         "--enable-libx265",
         "--enable-libxvid",
-
         "--enable-amf",
         "--enable-cuda-llvm",
         "--enable-cuvid",

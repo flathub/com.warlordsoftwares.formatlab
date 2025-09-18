@@ -482,22 +482,29 @@
     },
     {
       "name": "mpv",
-      "buildsystem": "cmake-ninja",
-      "builddir": true,
-      "config-opts": [
-        "-DENABLE_LIBASS=ON",
-        "-DENABLE_VAAPI=ON",
-        "-DENABLE_VAAPI_DRM=ON",
-        "-DENABLE_CUDA=ON",
-        "-DENABLE_NVENC=ON",
-        "-DENABLE_OPENGL=ON"
+      "buildsystem": "simple",
+      "build-commands": [
+        "python3 waf configure --disable-alsa --disable-build-date --disable-manpage-build --prefix=/app",
+        "python3 waf build",
+        "python3 waf install"
       ],
       "sources": [
         {
           "type": "archive",
-          "url": "https://github.com/mpv-player/mpv/archive/refs/tags/v0.39.3.tar.gz",
-          "sha256": "1ad5c9b69b2c1c0fda9582dfd992dc7f1340f3c3b9e93e0f36d1b37b9449b12e"
+          "url": "https://github.com/mpv-player/mpv/archive/v0.34.1.tar.gz",
+          "sha256": "32ded8c13b6398310fa27767378193dc1db6d78b006b70dbcbd3123a1445e746"
+        },
+        {
+          "type": "file",
+          "url": "https://waf.io/waf-2.0.23",
+          "sha256": "28a2e4583314a162cfcbffefb8a9202c1d7869040d30b5852da479b76d9c0491",
+          "dest-filename": "waf"
         }
+      ],
+      "cleanup": [
+        "/include",
+        "/lib/pkgconfig",
+        "/share"
       ]
     },
     {

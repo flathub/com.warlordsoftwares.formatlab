@@ -466,12 +466,22 @@
       "name": "mpv",
       "buildsystem": "meson",
       "config-opts": [
-        "-Dlibmpv=false",
-        "-Dlua=enabled",
-        "-Ddebug=false",
         "-Dbuild-date=false",
+        "-Dcplayer=true",
+        "-Dmanpage-build=disabled",
         "-Dalsa=disabled",
-        "-Dmanpage-build=disabled"
+        "-Dpulse=enabled",
+        "-Dopenal=enabled",
+        "-Dsdl2=disabled",
+        "-Dlua=enabled",
+        "-Dshaderc=disabled",
+        "-Dvaapi=enabled",
+        "-Dvdpau=enabled",
+        "-Dcdda=disabled",
+        "-Ddvbin=disabled",
+        "-Ddvdnav=disabled",
+        "-Dlibarchive=disabled",
+        "-Djack=disabled"
       ],
       "sources": [
         {

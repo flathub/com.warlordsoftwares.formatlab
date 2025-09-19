@@ -479,14 +479,13 @@
         "-Dvaapi=enabled",
         "-Dvdpau=enabled",
         "-Dcuda-hwaccel=enabled",
-        "-Dnvdec=enabled",
-        "-Dnvenc=enabled",
         "-Dcdda=disabled",
         "-Ddvbin=disabled",
         "-Ddvdnav=disabled",
         "-Dlibarchive=disabled",
         "-Djack=disabled",
-        "-Dlibmpv=false"
+        "-Dlibmpv=false",
+        "-Dlibass=enabled"
       ],
       "sources": [
         {

@@ -466,27 +466,12 @@
       "name": "mpv",
       "buildsystem": "meson",
       "config-opts": [
+        "-Dlibmpv=false",
+        "-Dlua=enabled",
+        "-Ddebug=false",
         "-Dbuild-date=false",
-        "-Dcplayer=true",
-        "-Dmanpage-build=disabled",
-        "-Dalsa=enabled",
-        "-Dpulse=enabled",
-        "-Dopenal=enabled",
-        "-Dsdl2=enabled",
-        "-Dlua=luajit",
-        "-Dshaderc=enabled",
-        "-Dvulkan=enabled",
-        "-Dvaapi=enabled",
-        "-Dvdpau=enabled",
-        "-Dcuda-hwaccel=enabled",
-        "-Dnvdec=enabled",
-        "-Dnvenc=enabled",
-        "-Dcdda=disabled",
-        "-Ddvbin=disabled",
-        "-Ddvdnav=disabled",
-        "-Dlibarchive=disabled",
-        "-Djack=disabled",
-        "-Dlibmpv=false"
+        "-Dalsa=disabled",
+        "-Dmanpage-build=disabled"
       ],
       "sources": [
         {
@@ -583,7 +568,7 @@
         {
           "type": "archive",
           "url": "https://warlordsoftwares.com/static/app_builds/flatpak/FLATPAK_FORMAT_LAB.tar.gz",
-          "sha256": "a7de5b50f24ff2634616891b7d3ddd2b7589ae3464fbdc20290a9443d5a10839"
+          "sha256": "47d18856673c191c40219e86bddf2d8856808b04624c6eb72fdc1f59950ecb9e"
         }
       ]
     }

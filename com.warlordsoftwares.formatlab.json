@@ -475,16 +475,13 @@
         "-Dsdl2=disabled",
         "-Dlua=disabled",
         "-Dshaderc=disabled",
-        "-Dopengl=enabled",
         "-Dvaapi=enabled",
         "-Dvdpau=enabled",
         "-Dcdda=disabled",
         "-Ddvbin=disabled",
         "-Ddvdnav=disabled",
         "-Dlibarchive=disabled",
-        "-Djack=disabled",
-        "-Dlibmpv=true",
-        "-Dvulkan=disabled"
+        "-Djack=disabled"
       ],
       "sources": [
         {

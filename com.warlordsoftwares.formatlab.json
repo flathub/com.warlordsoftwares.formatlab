@@ -468,7 +468,7 @@
       "config-opts": [
         "-Dbuild-date=false",
         "-Dlibmpv=true",
-        "-Dcplayer=false",
+        "-Dcplayer=true",
         "-Dmanpage-build=disabled"
       ],
       "sources": [

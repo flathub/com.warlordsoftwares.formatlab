@@ -509,7 +509,7 @@
         {
           "type": "archive",
           "url": "https://warlordsoftwares.com/static/app_builds/flatpak/FLATPAK_FORMAT_LAB.tar.gz",
-          "sha256": "47d18856673c191c40219e86bddf2d8856808b04624c6eb72fdc1f59950ecb9e"
+          "sha256": "b5d9f1f099a5f73c7dd9a6083cf24eb9bbbad44f626b5bd8b166a0af7eb8af6b"
         }
       ]
     }

@@ -1,0 +1,586 @@
+{
+  "app-id": "com.warlordsoftwares.formatlab",
+  "default-branch": "stable",
+  "runtime": "org.kde.Platform",
+  "runtime-version": "5.15-24.08",
+  "sdk": "org.kde.Sdk",
+  "base": "com.riverbankcomputing.PyQt.BaseApp",
+  "base-version": "5.15-24.08",
+  "command": "formatlab.sh",
+  "build-options": {
+    "env": [
+      "BASEAPP_REMOVE_WEBENGINE=1"
+    ]
+  },
+  "tags": [
+    "proprietary"
+  ],
+  "finish-args": [
+    "--share=network",
+    "--share=ipc",
+    "--socket=fallback-x11",
+    "--socket=wayland",
+    "--socket=pulseaudio",
+    "--device=all",
+    "--filesystem=xdg-download",
+    "--filesystem=xdg-documents",
+    "--filesystem=xdg-music",
+    "--filesystem=xdg-videos",
+    "--filesystem=/media",
+    "--filesystem=/run/media",
+    "--filesystem=xdg-run/gvfs",
+    "--filesystem=xdg-run/gvfsd",
+    "--talk-name=org.gtk.vfs.*",
+    "--env=QT_ENABLE_HIGHDPI_SCALING=1",
+    "--env=PACKAGE_TYPE=flatpak"
+  ],
+  "cleanup-commands": [
+    "/app/cleanup-BaseApp.sh"
+  ],
+  "cleanup": [
+    "/include",
+    "/lib/pkgconfig",
+    "/lib/cmake",
+    "*.a",
+    "*.la"
+  ],
+  "modules": [
+    {
+      "name": "xvid",
+      "subdir": "build/generic",
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://downloads.xvid.com/downloads/xvidcore-1.3.7.tar.gz",
+          "sha256": "abbdcbd39555691dd1c9b4d08f0a031376a3b211652c0d8b3b8aa9be1303ce2d"
+        }
+      ]
+    },
+    {
+      "name": "libvpx",
+      "config-opts": [
+        "--enable-runtime-cpu-detect",
+        "--enable-shared",
+        "--disable-static",
+        "--enable-pic",
+        "--disable-install-bins",
+        "--disable-install-docs",
+        "--disable-install-srcs",
+        "--enable-vp8",
+        "--enable-postproc",
+        "--enable-vp9",
+        "--enable-vp9-highbitdepth"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://github.com/webmproject/libvpx/archive/refs/tags/v1.13.1.tar.gz",
+          "sha256": "00dae80465567272abd077f59355f95ac91d7809a2d3006f9ace2637dd429d14"
+        }
+      ]
+    },
+    {
+      "name": "zimg",
+      "buildsystem": "autotools",
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://github.com/sekrit-twc/zimg/archive/release-3.0.6.tar.gz",
+          "sha256": "be89390f13a5c9b2388ce0f44a5e89364a20c1c57ce46d382b1fcc3967057577",
+          "x-checker-data": {
+            "type": "anitya",
+            "project-id": 13685,
+            "stable-only": true,
+            "url-template": "https://github.com/sekrit-twc/zimg/archive/release-$version.tar.gz"
+          }
+        }
+      ]
+    },
+    {
+      "name": "libass",
+      "config-opts": [
+        "--enable-harfbuzz",
+        "--enable-fontconfig"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://github.com/libass/libass/releases/download/0.17.4/libass-0.17.4.tar.xz",
+          "sha256": "78f1179b838d025e9c26e8fef33f8092f65611444ffa1bfc0cfac6a33511a05a",
+          "x-checker-data": {
+            "type": "anitya",
+            "project-id": 1560,
+            "stable-only": true,
+            "url-template": "https://github.com/libass/libass/releases/download/$version/libass-$version.tar.xz"
+          }
+        }
+      ]
+    },
+    {
+      "name": "x264",
+      "config-opts": [
+        "--disable-cli",
+        "--enable-shared"
+      ],
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://code.videolan.org/videolan/x264.git",
+          "commit": "5db6aa6cab1b146e07b60cc1736a01f21da01154"
+        }
+      ]
+    },
+    {
+      "name": "x265",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "subdir": "source",
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DENABLE_CLI=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://deb.debian.org/debian/pool/main/x/x265/x265_3.5.orig.tar.gz",
+          "sha256": "e70a3335cacacbba0b3a20ec6fecd6783932288ebc8163ad74bcc9606477cae8",
+          "x-checker-data": {
+            "type": "anitya",
+            "project-id": 7275,
+            "stable-only": true,
+            "url-template": "https://deb.debian.org/debian/pool/main/x/x265/x265_$version.orig.tar.gz"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lame",
+      "cleanup": [
+        "/share/doc"
+      ],
+      "config-opts": [
+        "--enable-shared",
+        "--disable-static",
+        "--disable-frontend",
+        "--enable-nasm"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://downloads.sourceforge.net/lame/lame-3.100.tar.gz",
+          "sha256": "ddfe36cab873794038ae2c1210557ad34857a4b6bdc515785d1da9e175b1da1e"
+        }
+      ]
+    },
+    {
+      "name": "opencl-headers",
+      "buildsystem": "simple",
+      "build-commands": [
+        "cp -av CL /app/include"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://github.com/KhronosGroup/OpenCL-Headers/archive/refs/tags/v2025.07.22.tar.gz",
+          "sha256": "98f0a3ea26b4aec051e533cb1750db2998ab8e82eda97269ed6efe66ec94a240",
+          "x-checker-data": {
+            "type": "anitya",
+            "project-id": 223257,
+            "stable-only": true,
+            "url-template": "https://github.com/KhronosGroup/OpenCL-Headers/archive/refs/tags/v$version.tar.gz"
+          }
+        }
+      ]
+    },
+    {
+      "name": "amf-headers",
+      "buildsystem": "simple",
+      "build-commands": [
+        "cp -av amf/public/include/. /app/include/AMF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://github.com/GPUOpen-LibrariesAndSDKs/AMF/archive/refs/tags/v1.4.36.tar.gz",
+          "sha256": "240a42033babc7920e5476506d5ac0c5628f67908833168e746406808d0ef146",
+          "x-checker-data": {
+            "type": "anitya",
+            "project-id": 138182,
+            "stable-only": true,
+            "url-template": "https://github.com/GPUOpen-LibrariesAndSDKs/AMF/archive/refs/tags/v$version.tar.gz"
+          }
+        }
+      ]
+    },
+    {
+      "name": "nv-codec-headers",
+      "cleanup": [
+        "*"
+      ],
+      "no-autogen": true,
+      "make-install-args": [
+        "PREFIX=/app"
+      ],
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://github.com/FFmpeg/nv-codec-headers.git",
+          "tag": "n13.0.19.0",
+          "commit": "e844e5b26f46bb77479f063029595293aa8f812d",
+          "x-checker-data": {
+            "type": "git",
+            "tag-pattern": "^n([\\d.]+)$"
+          }
+        }
+      ]
+    },
+    {
+      "name": "intel-onevpl-runtime",
+      "only-arches": [
+        "x86_64"
+      ],
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DBUILD_SAMPLES=OFF",
+        "-DBUILD_TESTS=OFF",
+        "-DBUILD_TOOLS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://github.com/oneapi-src/oneVPL-intel-gpu/archive/intel-onevpl-25.3.2.tar.gz",
+          "sha256": "d71484a6e187ca3c52a7da138cfa2b43dc6776bed4f5b5ed94237a268f1c1605",
+          "x-checker-data": {
+            "type": "anitya",
+            "project-id": 368736,
+            "stable-only": true,
+            "url-template": "https://github.com/oneapi-src/oneVPL-intel-gpu/archive/intel-onevpl-$version.tar.gz"
+          }
+        }
+      ]
+    },
+    {
+      "name": "oneapi-libvpl",
+      "skip-arches": [
+        "aarch64"
+      ],
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DBUILD_SAMPLES=OFF",
+        "-DBUILD_TESTS=OFF",
+        "-DBUILD_TOOLS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://github.com/intel/libvpl/archive/refs/tags/v2023.4.0.tar.gz",
+          "sha256": "978398c7bb1665a6ad7a1a15cc57dc0204608e56c88436e376b717320a9e63fd"
+        }
+      ]
+    },
+    {
+      "name": "ffmpeg",
+      "config-opts": [
+        "--disable-static",
+        "--disable-debug",
+        "--disable-doc",
+        "--disable-ffplay",
+        "--enable-shared",
+        "--enable-gnutls",
+        "--enable-gpl",
+        "--enable-libass",
+        "--enable-libfribidi",
+        "--enable-libmp3lame",
+        "--enable-libpulse",
+        "--enable-libtheora",
+        "--enable-libvorbis",
+        "--enable-libvpx",
+        "--enable-libx264",
+        "--enable-libx265",
+        "--enable-libxvid",
+        "--enable-amf",
+        "--enable-cuvid",
+        "--enable-ffnvcodec",
+        "--enable-libaom",
+        "--enable-libdav1d",
+        "--enable-libfontconfig",
+        "--enable-libfreetype",
+        "--enable-libopenjpeg",
+        "--enable-libopus",
+        "--enable-libpulse",
+        "--enable-librsvg",
+        "--enable-libsvtav1",
+        "--enable-libxml2",
+        "--enable-libzimg",
+        "--enable-nvdec",
+        "--enable-nvenc",
+        "--enable-opencl",
+        "--enable-rpath",
+        "--enable-vaapi",
+        "--enable-vdpau",
+        "--enable-libdrm",
+        "--enable-libwebp"
+      ],
+      "build-options": {
+        "prepend-path": "/usr/lib/sdk/llvm19/bin",
+        "prepend-ld-library-path": "/usr/lib/sdk/llvm19/lib",
+        "arch": {
+          "x86_64": {
+            "config-opts": [
+              "--enable-nvdec",
+              "--enable-cuvid",
+              "--enable-libvpl"
+            ]
+          }
+        }
+      },
+      "cleanup": [
+        "/share/ffmpeg/examples"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://www.ffmpeg.org/releases/ffmpeg-7.1.1.tar.xz",
+          "sha256": "733984395e0dbbe5c046abda2dc49a5544e7e0e1e2366bba849222ae9e3a03b1",
+          "x-checker-data": {
+            "type": "anitya",
+            "project-id": 5405,
+            "stable-only": true,
+            "url-template": "https://www.ffmpeg.org/releases/ffmpeg-$version.tar.xz"
+          }
+        }
+      ]
+    },
+    {
+      "name": "python3-req",
+      "buildsystem": "simple",
+      "build-commands": [],
+      "modules": [
+        {
+          "name": "python3-requests",
+          "buildsystem": "simple",
+          "build-commands": [
+            "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"requests\" --no-build-isolation"
+          ],
+          "sources": [
+            {
+              "type": "file",
+              "url": "https://files.pythonhosted.org/packages/64/62/428ef076be88fa93716b576e4a01f919d25968913e817077a386fcbe4f42/certifi-2023.11.17-py3-none-any.whl",
+              "sha256": "e036ab49d5b79556f99cfc2d9320b34cfbe5be05c5871b51de9329f0603b0474"
+            },
+            {
+              "type": "file",
+              "url": "https://files.pythonhosted.org/packages/63/09/c1bc53dab74b1816a00d8d030de5bf98f724c52c1635e07681d312f20be8/charset-normalizer-3.3.2.tar.gz",
+              "sha256": "f30c3cb33b24454a82faecaf01b19c18562b1e89558fb6c56de4d9118a032fd5"
+            },
+            {
+              "type": "file",
+              "url": "https://files.pythonhosted.org/packages/c2/e7/a82b05cf63a603df6e68d59ae6a68bf5064484a0718ea5033660af4b54a9/idna-3.6-py3-none-any.whl",
+              "sha256": "c05567e9c24a6b9faaa835c4821bad0590fbb9d5779e7caa6e1cc4978e7eb24f"
+            },
+            {
+              "type": "file",
+              "url": "https://files.pythonhosted.org/packages/70/8e/0e2d847013cb52cd35b38c009bb167a1a26b2ce6cd6965bf26b47bc0bf44/requests-2.31.0-py3-none-any.whl",
+              "sha256": "58cd2187c01e70e6e26505bca751777aa9f2ee0b7f4300988b709f44e013003f"
+            },
+            {
+              "type": "file",
+              "url": "https://files.pythonhosted.org/packages/96/94/c31f58c7a7f470d5665935262ebd7455c7e4c7782eb525658d3dbf4b9403/urllib3-2.1.0-py3-none-any.whl",
+              "sha256": "55901e917a5896a349ff771be919f8bd99aff50b79fe58fec595eb37bbc56bb3"
+            }
+          ]
+        },
+        {
+          "name": "python3-psutil",
+          "buildsystem": "simple",
+          "build-commands": [
+            "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"psutil\" --no-build-isolation"
+          ],
+          "sources": [
+            {
+              "type": "file",
+              "url": "https://files.pythonhosted.org/packages/90/c7/6dc0a455d111f68ee43f27793971cf03fe29b6ef972042549db29eec39a2/psutil-5.9.8.tar.gz",
+              "sha256": "6be126e3225486dff286a8fb9a06246a5253f4c7c53b475ea5f5ac934e64194c"
+            }
+          ]
+        },
+        {
+          "name": "python3-python-slugify",
+          "buildsystem": "simple",
+          "build-commands": [
+            "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"python-slugify\" --no-build-isolation"
+          ],
+          "sources": [
+            {
+              "type": "file",
+              "url": "https://files.pythonhosted.org/packages/b4/85/6aa722a11307ec572682023b76cad4c52cda708dfc25fcb4b4a6051da7ab/python_slugify-8.0.1-py2.py3-none-any.whl",
+              "sha256": "70ca6ea68fe63ecc8fa4fcf00ae651fc8a5d02d93dcd12ae6d4fc7ca46c4d395"
+            },
+            {
+              "type": "file",
+              "url": "https://files.pythonhosted.org/packages/a6/a5/c0b6468d3824fe3fde30dbb5e1f687b291608f9473681bbf7dabbf5a87d7/text_unidecode-1.3-py2.py3-none-any.whl",
+              "sha256": "1311f10e8b895935241623731c2ba64f4c455287888b18189350b67134a822e8"
+            }
+          ]
+        },
+        {
+          "name": "python3-ffmpeg-python",
+          "buildsystem": "simple",
+          "build-commands": [
+            "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"ffmpeg-python\" --no-build-isolation"
+          ],
+          "sources": [
+            {
+              "type": "file",
+              "url": "https://files.pythonhosted.org/packages/d7/0c/56be52741f75bad4dc6555991fabd2e07b432d333da82c11ad701123888a/ffmpeg_python-0.2.0-py3-none-any.whl",
+              "sha256": "ac441a0404e053f8b6a1113a77c0f452f1cfc62f6344a769475ffdc0f56c23c5"
+            },
+            {
+              "type": "file",
+              "url": "https://files.pythonhosted.org/packages/8f/2e/cf6accf7415237d6faeeebdc7832023c90e0282aa16fd3263db0eb4715ec/future-0.18.3.tar.gz",
+              "sha256": "34a17436ed1e96697a86f9de3d15a3b0be01d8bc8de9c1dffd59fb8234ed5307"
+            }
+          ]
+        },
+        {
+          "name": "python3-pycryptodome",
+          "buildsystem": "simple",
+          "build-commands": [
+            "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"pycryptodome\" --no-build-isolation"
+          ],
+          "sources": [
+            {
+              "type": "file",
+              "url": "https://files.pythonhosted.org/packages/b9/ed/19223a0a0186b8a91ebbdd2852865839237a21c74f1fbc4b8d5b62965239/pycryptodome-3.20.0.tar.gz",
+              "sha256": "09609209ed7de61c2b560cc5c8c4fbf892f8b15b1faf7e4cbffac97db1fffda7"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "mpv",
+      "buildsystem": "meson",
+      "config-opts": [
+        "-Dbuild-date=false",
+        "-Dcplayer=true",
+        "-Dmanpage-build=disabled",
+        "-Dalsa=disabled",
+        "-Dpulse=enabled",
+        "-Dopenal=enabled",
+        "-Dsdl2=disabled",
+        "-Dlua=enabled",
+        "-Dshaderc=disabled",
+        "-Dvaapi=enabled",
+        "-Dvdpau=enabled",
+        "-Dcdda=disabled",
+        "-Ddvbin=disabled",
+        "-Ddvdnav=disabled",
+        "-Dlibarchive=disabled",
+        "-Djack=disabled"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://github.com/mpv-player/mpv/archive/refs/tags/v0.40.0.tar.gz",
+          "sha256": "10a0f4654f62140a6dd4d380dcf0bbdbdcf6e697556863dc499c296182f081a3",
+          "x-checker-data": {
+            "type": "anitya",
+            "project-id": 5348,
+            "stable-only": true,
+            "url-template": "https://github.com/mpv-player/mpv/archive/v$version.tar.gz"
+          }
+        }
+      ],
+      "modules": [
+        {
+          "name": "luajit",
+          "no-autogen": true,
+          "cleanup": [
+            "/bin",
+            "/lib/*.a",
+            "/include",
+            "/lib/pkgconfig",
+            "/share/man"
+          ],
+          "sources": [
+            {
+              "type": "git",
+              "url": "https://github.com/LuaJIT/LuaJIT.git",
+              "commit": "f73e649a954b599fc184726c376476e7a5c439ca"
+            },
+            {
+              "type": "shell",
+              "commands": [
+                "sed -i 's|/usr/local|/app|' ./Makefile"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "libplacebo",
+          "buildsystem": "meson",
+          "cleanup": [
+            "/include",
+            "/lib/pkgconfig"
+          ],
+          "sources": [
+            {
+              "type": "git",
+              "url": "https://github.com/haasn/libplacebo.git",
+              "commit": "3188549fba13bbdf3a5a98de2a38c2e71f04e21e",
+              "tag": "v7.351.0",
+              "x-checker-data": {
+                "type": "anitya",
+                "project-id": 20101,
+                "stable-only": true,
+                "tag-template": "v$version"
+              }
+            }
+          ]
+        },
+        {
+          "name": "libXpresent",
+          "buildsystem": "autotools",
+          "sources": [
+            {
+              "type": "archive",
+              "url": "https://xorg.freedesktop.org/archive/individual/lib/libXpresent-1.0.2.tar.xz",
+              "sha256": "4e5b21b4812206a4b223013606ae31170502c1043038777a1ef8f70c09d37602",
+              "x-checker-data": {
+                "type": "anitya",
+                "project-id": 17166,
+                "stable-only": true,
+                "url-template": "https://xorg.freedesktop.org/archive/individual/lib/libXpresent-$version.tar.xz"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "formatlab",
+      "buildsystem": "simple",
+      "build-commands": [
+        "mkdir -p ${FLATPAK_DEST}/formatlab",
+        "cp -r * ${FLATPAK_DEST}/formatlab",
+        "install -Dm755 ${FLATPAK_DEST}/formatlab/formatlab.sh ${FLATPAK_DEST}/bin/formatlab.sh",
+        "install -Dm644 ${FLATPAK_DEST}/formatlab/share/icons/icon.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/com.warlordsoftwares.formatlab.png",
+        "install -Dm644 ${FLATPAK_DEST}/formatlab/share/applications/formatlab.desktop ${FLATPAK_DEST}/share/applications/com.warlordsoftwares.formatlab.desktop",
+        "desktop-file-edit --set-icon=${FLATPAK_ID} ${FLATPAK_DEST}/share/applications/com.warlordsoftwares.formatlab.desktop",
+        "install -Dm644 ${FLATPAK_DEST}/formatlab/share/metainfo/com.warlordsoftwares.formatlab.metainfo.xml ${FLATPAK_DEST}/share/metainfo/com.warlordsoftwares.formatlab.metainfo.xml"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://warlordsoftwares.com/static/app_builds/flatpak/FLATPAK_FORMAT_LAB.tar.gz",
+          "sha256": "b66cab5e0ecd96945f2dcc4e95317eda7a31e38493e335c599fa808f207ef519"
+        }
+      ]
+    }
+  ]
+}

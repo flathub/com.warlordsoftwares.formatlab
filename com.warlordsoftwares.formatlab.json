@@ -2,10 +2,10 @@
   "app-id": "com.warlordsoftwares.formatlab",
   "default-branch": "stable",
   "runtime": "org.kde.Platform",
-  "runtime-version": "5.15-24.08",
+  "runtime-version": "5.15-23.08",
   "sdk": "org.kde.Sdk",
   "base": "com.riverbankcomputing.PyQt.BaseApp",
-  "base-version": "5.15-24.08",
+  "base-version": "5.15-23.08",
   "command": "formatlab.sh",
   "build-options": {
     "env": [
@@ -578,7 +578,7 @@
         {
           "type": "archive",
           "url": "https://warlordsoftwares.com/static/app_builds/flatpak/FLATPAK_FORMAT_LAB.tar.gz",
-          "sha256": "6a36d9ea2555f13f1d4b3a79f69c46d855e624a9edd0389edee1b46b43cfa33f"
+          "sha256": "9365c1c734d9f11b2aebe72ff8bbcde740afbf4984d4594ffd30fcedefa91d42"
         }
       ]
     }

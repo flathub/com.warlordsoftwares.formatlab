@@ -234,6 +234,43 @@
         }
       ]
     },
+        {
+      "name": "svt-av1",
+      "buildsystem": "cmake-ninja",
+      "build-options": {
+        "arch": {
+          "x86_64": {
+            "config-opts": [
+              "-DENABLE_AVX512=ON"
+            ]
+          }
+        }
+      },
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DBUILD_SHARED_LIBS=ON",
+        "-DBUILD_TESTING=OFF",
+        "-DBUILD_APPS=OFF"
+      ],
+      "builddir": true,
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://gitlab.com/AOMediaCodec/SVT-AV1.git",
+          "commit": "6e69def4ec283fe0b71195671245c3b768bebdef",
+          "tag": "v2.3.0",
+          "x-checker-data": {
+            "type": "git",
+            "tag-pattern": "^v([\\d.]+)$",
+            "versions": [
+              { "!=": "v3.0.0" },
+              { "!=": "v3.0.1" },
+              { "!=": "v3.0.2" }
+            ]
+          }
+        }
+      ]
+      },
       {
         "name": "intel-onevpl-runtime",
         "buildsystem": "cmake-ninja",

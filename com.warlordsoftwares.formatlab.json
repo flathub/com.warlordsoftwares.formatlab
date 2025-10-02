@@ -46,6 +46,50 @@
   ],
   "modules": [
     {
+      "name": "libass",
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://github.com/libass/libass/releases/download/0.17.1/libass-0.17.1.tar.xz",
+          "sha256": "f0da0bbfba476c16ae3e1cfd862256d30915911f7abaa1b16ce62ee653192784"
+        },
+        {
+          "type": "script",
+          "commands": [
+            "autoreconf -fiv"
+          ],
+          "dest-filename": "autogen.sh"
+        }
+      ],
+      "cleanup": [
+        "/include",
+        "/lib/pkgconfig",
+        "/share",
+        "*.a",
+        "*.la"
+      ]
+    },
+    {
+      "name": "luajit",
+      "no-autogen": true,
+      "make-install-args": [
+        "PREFIX=${FLATPAK_DEST}"
+      ],
+      "cleanup": [
+        "/bin",
+        "/include",
+        "/lib/pkgconfig",
+        "/share/man"
+      ],
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://github.com/LuaJIT/LuaJIT.git",
+          "commit": "4c2441c16ce3c4e312aaefecc6d40c4fe21de97c"
+        }
+      ]
+    },
+    {
       "name": "xvid",
       "subdir": "build/generic",
       "sources": [
@@ -498,50 +542,6 @@
               "sha256": "09609209ed7de61c2b560cc5c8c4fbf892f8b15b1faf7e4cbffac97db1fffda7"
             }
           ]
-        }
-      ]
-    },
-    {
-      "name": "libass",
-      "sources": [
-        {
-          "type": "archive",
-          "url": "https://github.com/libass/libass/releases/download/0.17.1/libass-0.17.1.tar.xz",
-          "sha256": "f0da0bbfba476c16ae3e1cfd862256d30915911f7abaa1b16ce62ee653192784"
-        },
-        {
-          "type": "script",
-          "commands": [
-            "autoreconf -fiv"
-          ],
-          "dest-filename": "autogen.sh"
-        }
-      ],
-      "cleanup": [
-        "/include",
-        "/lib/pkgconfig",
-        "/share",
-        "*.a",
-        "*.la"
-      ]
-    },
-    {
-      "name": "luajit",
-      "no-autogen": true,
-      "make-install-args": [
-        "PREFIX=${FLATPAK_DEST}"
-      ],
-      "cleanup": [
-        "/bin",
-        "/include",
-        "/lib/pkgconfig",
-        "/share/man"
-      ],
-      "sources": [
-        {
-          "type": "git",
-          "url": "https://github.com/LuaJIT/LuaJIT.git",
-          "commit": "4c2441c16ce3c4e312aaefecc6d40c4fe21de97c"
         }
       ]
     },

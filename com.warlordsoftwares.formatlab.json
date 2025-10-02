@@ -5,12 +5,12 @@
   "runtime-version": "5.15-23.08",
   "sdk": "org.kde.Sdk",
   "add-extensions": {
-      "org.freedesktop.Platform.ffmpeg-full": {
-        "directory": "lib/ffmpeg",
-        "version": "24.08",
-        "add-ld-path": "."
-      }
-    },
+    "org.freedesktop.Platform.ffmpeg-full": {
+      "directory": "lib/ffmpeg",
+      "version": "24.08",
+      "add-ld-path": "."
+    }
+  },
   "base": "com.riverbankcomputing.PyQt.BaseApp",
   "base-version": "5.15-23.08",
   "command": "formatlab.sh",
@@ -19,7 +19,9 @@
       "BASEAPP_REMOVE_WEBENGINE=1"
     ]
   },
-  "tags": ["proprietary"],
+  "tags": [
+    "proprietary"
+  ],
   "finish-args": [
     "--share=network",
     "--share=ipc",
@@ -52,6 +54,26 @@
   ],
   "modules": [
     {
+      "name": "luajit",
+      "no-autogen": true,
+      "make-install-args": [
+        "PREFIX=${FLATPAK_DEST}"
+      ],
+      "cleanup": [
+        "/bin",
+        "/include",
+        "/lib/pkgconfig",
+        "/share/man"
+      ],
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://github.com/LuaJIT/LuaJIT.git",
+          "commit": "4c2441c16ce3c4e312aaefecc6d40c4fe21de97c"
+        }
+      ]
+    },
+    {
       "name": "opencl-headers",
       "buildsystem": "simple",
       "build-commands": [
@@ -79,7 +101,6 @@
         }
       ]
     },
-
     {
       "name": "python3-req",
       "buildsystem": "simple",
@@ -189,105 +210,33 @@
     },
     {
       "name": "mpv",
-      "buildsystem": "meson",
-      "config-opts": [
-        "-Dbuild-date=false",
-        "-Dcplayer=true",
-        "-Dmanpage-build=disabled",
-        "-Dalsa=disabled",
-        "-Dpulse=enabled",
-        "-Dopenal=enabled",
-        "-Dsdl2=disabled",
-        "-Dlua=enabled",
-        "-Dshaderc=disabled",
-        "-Dvaapi=enabled",
-        "-Dvdpau=enabled",
-        "-Dcdda=disabled",
-        "-Ddvbin=disabled",
-        "-Ddvdnav=disabled",
-        "-Dlibarchive=disabled",
-        "-Djack=disabled"
+      "buildsystem": "simple",
+      "build-commands": [
+        "python3 waf configure --disable-alsa --disable-build-date --disable-manpage-build --prefix=/app",
+        "python3 waf build",
+        "python3 waf install"
       ],
       "sources": [
         {
           "type": "archive",
-          "url": "https://github.com/mpv-player/mpv/archive/refs/tags/v0.40.0.tar.gz",
-          "sha256": "10a0f4654f62140a6dd4d380dcf0bbdbdcf6e697556863dc499c296182f081a3",
-          "x-checker-data": {
-            "type": "anitya",
-            "project-id": 5348,
-            "stable-only": true,
-            "url-template": "https://github.com/mpv-player/mpv/archive/v$version.tar.gz"
-          }
+          "url": "https://github.com/mpv-player/mpv/archive/v0.36.0.tar.gz",
+          "sha256": "29abc44f8ebee013bb2f9fe14d80b30db19b534c679056e4851ceadf5a5e8bf6"
+        },
+        {
+          "type": "file",
+          "url": "https://waf.io/waf-2.0.26",
+          "sha256": "dcec3e179f9c33a66544f1b3d7d91f20f6373530510fa6a858cddb6bfdcde14b",
+          "dest-filename": "waf"
         }
       ],
-      "modules": [
-        {
-          "name": "luajit",
-          "no-autogen": true,
-          "cleanup": [
-            "/bin",
-            "/lib/*.a",
-            "/include",
-            "/lib/pkgconfig",
-            "/share/man"
-          ],
-          "sources": [
-            {
-              "type": "git",
-              "url": "https://github.com/LuaJIT/LuaJIT.git",
-              "commit": "f73e649a954b599fc184726c376476e7a5c439ca"
-            },
-            {
-              "type": "shell",
-              "commands": [
-                "sed -i 's|/usr/local|/app|' ./Makefile"
-              ]
-            }
-          ]
-        },
-        {
-          "name": "libplacebo",
-          "buildsystem": "meson",
-          "config-opts": [
-            "-Dvulkan=enabled",
-            "-Dd3d11=disabled",
-            "-Ddemos=false"
-          ],
-          "cleanup": [
-            "/include",
-            "/lib/pkgconfig"
-          ],
-          "sources": [
-            {
-              "type": "git",
-              "url": "https://github.com/haasn/libplacebo.git",
-              "tag": "v7.351.0",
-              "commit": "3188549fba13bbdf3a5a98de2a38c2e71f04e21e",
-              "x-checker-data": {
-                "type": "git",
-                "tag-pattern": "^v([\\d.]+)$"
-              }
-            }
-          ]
-        },
-        {
-          "name": "libXpresent",
-          "buildsystem": "autotools",
-          "sources": [
-            {
-              "type": "archive",
-              "url": "https://xorg.freedesktop.org/archive/individual/lib/libXpresent-1.0.2.tar.xz",
-              "sha256": "4e5b21b4812206a4b223013606ae31170502c1043038777a1ef8f70c09d37602",
-              "x-checker-data": {
-                "type": "anitya",
-                "project-id": 17166,
-                "stable-only": true,
-                "url-template": "https://xorg.freedesktop.org/archive/individual/lib/libXpresent-$version.tar.xz"
-              }
-            }
-          ]
-        }
+      "post-install": [
+        "mkdir -p /app/etc/mpv/",
+        "echo \"screenshot-directory=~/Pictures/UMD4-MPV-screenshots\" > /app/etc/mpv/mpv.conf"
+      ],
+      "cleanup": [
+        "/include",
+        "/lib/pkgconfig",
+        "/share"
       ]
     },
     {
@@ -310,8 +259,5 @@
         }
       ]
     }
-
-
-
   ]
 }

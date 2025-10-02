@@ -230,8 +230,7 @@
         }
       ],
       "post-install": [
-        "mkdir -p /app/etc/mpv/",
-        "echo \"screenshot-directory=~/Pictures/UMD4-MPV-screenshots\" > /app/etc/mpv/mpv.conf"
+        "mkdir -p /app/etc/mpv/"
       ],
       "cleanup": [
         "/include",

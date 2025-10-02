@@ -4,6 +4,13 @@
   "runtime": "org.kde.Platform",
   "runtime-version": "5.15-23.08",
   "sdk": "org.kde.Sdk",
+  "add-extensions": {
+      "org.freedesktop.Platform.ffmpeg-full": {
+        "directory": "lib/ffmpeg",
+        "version": "24.08",
+        "add-ld-path": "."
+      }
+    },
   "base": "com.riverbankcomputing.PyQt.BaseApp",
   "base-version": "5.15-23.08",
   "command": "formatlab.sh",
@@ -33,7 +40,8 @@
     "--env=PACKAGE_TYPE=flatpak"
   ],
   "cleanup-commands": [
-    "/app/cleanup-BaseApp.sh"
+    "/app/cleanup-BaseApp.sh",
+    "mkdir -p /app/lib/ffmpeg"
   ],
   "cleanup": [
     "/include",

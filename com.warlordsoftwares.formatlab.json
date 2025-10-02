@@ -234,33 +234,33 @@
         }
       ]
     },
-    {
-      "name": "intel-onevpl-runtime",
-      "only-arches": [
-        "x86_64"
-      ],
-      "buildsystem": "cmake-ninja",
-      "builddir": true,
-      "config-opts": [
-        "-DCMAKE_BUILD_TYPE=Release",
-        "-DBUILD_SAMPLES=OFF",
-        "-DBUILD_TESTS=OFF",
-        "-DBUILD_TOOLS=OFF"
-      ],
-      "sources": [
-        {
-          "type": "archive",
-          "url": "https://github.com/oneapi-src/oneVPL-intel-gpu/archive/intel-onevpl-25.3.2.tar.gz",
-          "sha256": "d71484a6e187ca3c52a7da138cfa2b43dc6776bed4f5b5ed94237a268f1c1605",
-          "x-checker-data": {
-            "type": "anitya",
-            "project-id": 368736,
-            "stable-only": true,
-            "url-template": "https://github.com/oneapi-src/oneVPL-intel-gpu/archive/intel-onevpl-$version.tar.gz"
-          }
-        }
-      ]
-    },
+      {
+          "name": "intel-onevpl-runtime",
+          "only-arches": [
+              "x86_64"
+          ],
+          "buildsystem": "cmake-ninja",
+          "builddir": true,
+          "config-opts": [
+              "-DCMAKE_BUILD_TYPE=Release",
+              "-DBUILD_SAMPLES=OFF",
+              "-DBUILD_TESTS=OFF",
+              "-DBUILD_TOOLS=OFF"
+          ],
+          "sources": [
+              {
+                  "type": "archive",
+                  "url": "https://github.com/oneapi-src/oneVPL-intel-gpu/archive/intel-onevpl-25.3.4.tar.gz",
+                  "sha256": "8640073f161f6c2b919f37c8d1e8688a0e6f9b7590a2399cc0d2a89910afeafc",
+                  "x-checker-data": {
+                      "type": "anitya",
+                      "project-id": 368736,
+                      "stable-only": true,
+                      "url-template": "https://github.com/oneapi-src/oneVPL-intel-gpu/archive/intel-onevpl-$version.tar.gz"
+                  }
+              }
+          ]
+      },
     {
       "name": "oneapi-libvpl",
       "skip-arches": [

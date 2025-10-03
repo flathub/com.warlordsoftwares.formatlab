@@ -1,0 +1,78 @@
+app-id: com.warlordsoftwares.formatlab
+default-branch: stable
+runtime: org.kde.Platform
+runtime-version: 5.15-23.08
+sdk: org.kde.Sdk
+base: com.riverbankcomputing.PyQt.BaseApp
+base-version: 5.15-23.08
+command: formatlab.sh
+
+build-options:
+  env:
+    - BASEAPP_REMOVE_WEBENGINE=1
+
+tags:
+  - proprietary
+
+finish-args:
+  - --share=network
+  - --share=ipc
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --socket=pulseaudio
+  - --device=all
+  - --filesystem=xdg-download
+  - --filesystem=xdg-documents
+  - --filesystem=xdg-music
+  - --filesystem=xdg-videos
+  - --filesystem=/media
+  - --filesystem=/run/media
+  - --filesystem=xdg-run/gvfs
+  - --filesystem=xdg-run/gvfsd
+  - --talk-name=org.gtk.vfs.*
+  - --env=QT_ENABLE_HIGHDPI_SCALING=1
+  - --env=PACKAGE_TYPE=flatpak
+
+cleanup-commands:
+  - /app/cleanup-BaseApp.sh
+
+cleanup:
+  - /include
+  - /lib/pkgconfig
+  - /lib/cmake
+  - "*.a"
+  - "*.la"
+
+modules:
+  - name: luajit
+    no-autogen: true
+    make-install-args:
+      - PREFIX=${FLATPAK_DEST}
+    cleanup:
+      - /bin
+      - /include
+      - /lib/pkgconfig
+      - /share/man
+    sources:
+      - type: git
+        url: https://github.com/LuaJIT/LuaJIT.git
+        commit: 4c2441c16ce3c4e312aaefecc6d40c4fe21de97c
+
+  - include: ffmpeg.json
+  - include: mpv.json
+  - include: python3-req.json
+
+  - name: formatlab
+    buildsystem: simple
+    build-commands:
+      - mkdir -p ${FLATPAK_DEST}/formatlab
+      - cp -r * ${FLATPAK_DEST}/formatlab
+      - install -Dm755 ${FLATPAK_DEST}/formatlab/formatlab.sh ${FLATPAK_DEST}/bin/formatlab.sh
+      - install -Dm644 ${FLATPAK_DEST}/formatlab/share/icons/icon.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/com.warlordsoftwares.formatlab.png
+      - install -Dm644 ${FLATPAK_DEST}/formatlab/share/applications/formatlab.desktop ${FLATPAK_DEST}/share/applications/com.warlordsoftwares.formatlab.desktop
+      - desktop-file-edit --set-icon=${FLATPAK_ID} ${FLATPAK_DEST}/share/applications/com.warlordsoftwares.formatlab.desktop
+      - install -Dm644 ${FLATPAK_DEST}/formatlab/share/metainfo/com.warlordsoftwares.formatlab.metainfo.xml ${FLATPAK_DEST}/share/metainfo/com.warlordsoftwares.formatlab.metainfo.xml
+    sources:
+      - type: archive
+        url: https://warlordsoftwares.com/static/app_builds/flatpak/FLATPAK_FORMAT_LAB.tar.gz
+        sha256: ef7de80561639bed6d9799c13deeec32d254a968af3ab04b557ef0317dcae8a5

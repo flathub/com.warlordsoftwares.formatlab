@@ -69,4 +69,4 @@ modules:
     sources:
       - type: archive
         url: https://warlordsoftwares.com/static/app_builds/flatpak/FLATPAK_FORMAT_LAB.tar.gz
-        sha256: ef7de80561639bed6d9799c13deeec32d254a968af3ab04b557ef0317dcae8a5
+        sha256: 90f7aa449be7e4ce29541e9df8e30c524d12c1df44b8f086a692c97b3c0aece3

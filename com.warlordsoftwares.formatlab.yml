@@ -7,7 +7,7 @@ base-version: 5.15-23.08
 
 cleanup-commands:
   - /app/cleanup-BaseApp.sh
-  -
+
 build-options:
   env:
     - BASEAPP_REMOVE_WEBENGINE=1

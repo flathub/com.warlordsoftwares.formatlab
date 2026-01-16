@@ -1,9 +1,9 @@
 app-id: com.warlordsoftwares.formatlab
 runtime: org.kde.Platform
-runtime-version: 5.15-23.08
+runtime-version: "5.15-24.08"
 sdk: org.kde.Sdk
 base: com.riverbankcomputing.PyQt.BaseApp
-base-version: 5.15-23.08
+base-version: "5.15-24.08"
 
 cleanup-commands:
   - /app/cleanup-BaseApp.sh
@@ -69,4 +69,4 @@ modules:
     sources:
       - type: archive
         url: https://warlordsoftwares.com/static/app_builds/flatpak/FLATPAK_FORMAT_LAB.tar.gz
-        sha256: f86be2d106bd295732073e670ba72c568288947071d3e82879976f2dbd72fdcb
+        sha256: e6c9b97fd6082cab6ab4fa2e8c5fa5b665f6e891c9c79a860826b49f2b4b5744

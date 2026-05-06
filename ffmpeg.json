@@ -1,73 +1,5 @@
 {
-  "name": "libmpv",
-  "cleanup": [
-    "/include",
-    "/lib/pkgconfig"
-  ],
-  "buildsystem": "simple",
-  "build-commands": [
-    "python3 waf configure --prefix=${FLATPAK_DEST} --enable-libmpv-shared --disable-cplayer --disable-alsa --disable-manpage-build --disable-debug-build",
-    "python3 waf build",
-    "python3 waf install"
-  ],
-  "sources": [
-    {
-      "type": "archive",
-      "url": "https://github.com/mpv-player/mpv/archive/v0.36.0.tar.gz",
-      "sha256": "29abc44f8ebee013bb2f9fe14d80b30db19b534c679056e4851ceadf5a5e8bf6"
-    },
-    {
-      "type": "file",
-      "url": "https://waf.io/waf-2.0.26",
-      "sha256": "dcec3e179f9c33a66544f1b3d7d91f20f6373530510fa6a858cddb6bfdcde14b",
-      "dest-filename": "waf"
-    }
-  ],
-  "modules": [
-    {
-      "name": "libass",
-      "cleanup": [
-        "/include",
-        "/lib/*.la",
-        "/lib/pkgconfig"
-      ],
-      "config-opts": [
-        "--disable-static"
-      ],
-      "sources": [
-        {
-          "type": "archive",
-          "url": "https://github.com/libass/libass/releases/download/0.17.1/libass-0.17.1.tar.gz",
-          "sha256": "d653be97198a0543c69111122173c41a99e0b91426f9e17f06a858982c2fb03d"
-        }
-      ],
-      "modules": [
-        {
-          "name": "fribidi",
-          "cleanup": [
-            "/bin",
-            "/include",
-            "/lib/pkgconfig",
-            "/lib/*.la",
-            "/share/man"
-          ],
-          "buildsystem": "meson",
-          "config-opts": [
-            "--buildtype=release",
-            "-Ddocs=false"
-          ],
-          "sources": [
-            {
-              "type": "git",
-              "url": "https://github.com/fribidi/fribidi.git",
-              "tag": "v1.0.12",
-              "commit": "6428d8469e536bcbb6e12c7b79ba6659371c435a"
-            }
-          ]
-        }
-      ]
-    },
-    {
+
       "name": "ffmpeg",
       "cleanup": [
         "/include",
@@ -431,8 +363,8 @@
         },
         {
           "name": "oneapi-libvpl",
-          "only-arches": [
-            "x86_64"
+          "skip-arches": [
+            "aarch64"
           ],
           "buildsystem": "cmake-ninja",
           "builddir": true,
@@ -451,6 +383,4 @@
           ]
         }
       ]
-    }
-  ]
 }

@@ -5,10 +5,6 @@ sdk: org.kde.Sdk
 base: com.riverbankcomputing.PyQt.BaseApp
 base-version: "5.15-25.08"
 
-add-extensions:
-  org.freedesktop.Platform.codecs-extra:
-    version: "25.08"
-
 cleanup-commands:
   - /app/cleanup-BaseApp.sh
 

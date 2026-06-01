@@ -5,10 +5,6 @@ sdk: org.kde.Sdk
 base: com.riverbankcomputing.PyQt.BaseApp
 base-version: "5.15-25.08"
 
-add-extensions:
-  org.freedesktop.Platform.codecs-extra:
-    version: "25.08"
-
 cleanup-commands:
   - /app/cleanup-BaseApp.sh
 
@@ -135,4 +131,5 @@ modules:
     sources:
       - type: archive
         url: https://warlordsoftwares.com/static/app_builds/flatpak/FLATPAK_FORMAT_LAB.tar.gz
-        sha256: b0678096d15e4dfef0f79867ab7021200f35f7aec43ed69566ad4efb8e5609b6
+        sha256: 821ab67e207db5c68277a22fc07812b31a453969627050d72c1a18d1dfed5532
+

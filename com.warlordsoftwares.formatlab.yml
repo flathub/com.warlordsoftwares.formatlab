@@ -93,11 +93,27 @@ modules:
         url: https://github.com/sekrit-twc/zimg/archive/release-3.0.6.tar.gz
         sha256: be89390f13a5c9b2388ce0f44a5e89364a20c1c57ce46d382b1fcc3967057577
 
+  # mpv needs xpresent for its X11 backend and the runtime does not ship it.
+  # Without this module meson silently drops X11 and mpv is Wayland-only:
+  # on X11 desktops (Cinnamon, XFCE, MATE) playback has sound but no video.
+  - name: libXpresent
+    cleanup:
+      - /share/man
+      - /lib/*.la
+    sources:
+      - type: archive
+        url: https://xorg.freedesktop.org/archive/individual/lib/libXpresent-1.0.2.tar.xz
+        sha256: 4e5b21b4812206a4b223013606ae31170502c1043038777a1ef8f70c09d37602
+
   - name: mpv
     buildsystem: meson
     build-options:
       cflags: -DNDEBUG=1
     config-opts:
+      # "enabled" (not auto) so a missing X11 dependency fails the build
+      # instead of shipping an mpv that cannot open a window on X11.
+      - -Dx11=enabled
+      - -Degl-x11=enabled
       - -Dlibmpv=false
       - -Dbuild-date=false
       - -Dpulse=enabled
@@ -131,7 +147,7 @@ modules:
     sources:
       - type: archive
         url: https://warlordsoftwares.com/static/app_builds/flatpak/FLATPAK_FORMAT_LAB.tar.gz
-        sha256: 2af211054fffd552789d6bb08b500d248827278284fa34031ccda5596167606c
+        sha256: 5a637810c0ef0010dec0da075716191e4cffb3d191e54c889ecb6d13eac29c14
 
 
 

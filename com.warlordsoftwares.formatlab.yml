@@ -25,6 +25,7 @@ finish-args:
   - --filesystem=xdg-documents
   - --filesystem=xdg-music
   - --filesystem=xdg-videos
+  - --filesystem=xdg-pictures:ro
   - --filesystem=/media
   - --filesystem=/run/media
   - --filesystem=xdg-run/gvfs
@@ -147,7 +148,7 @@ modules:
     sources:
       - type: archive
         url: https://warlordsoftwares.com/static/app_builds/flatpak/FLATPAK_FORMAT_LAB.tar.gz
-        sha256: b01792c5ca7aafdc2308babb47ae1829cccb6dfdbd83c232af1c7ace5dc008e6
+        sha256: 3aea000d8ce087f39b2592cb16c1d0790378b2983365508f2a02732074677aed
 
 
 

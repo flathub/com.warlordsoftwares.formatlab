@@ -21,11 +21,7 @@ finish-args:
   - --socket=wayland
   - --socket=pulseaudio
   - --device=all
-  - --filesystem=xdg-download
-  - --filesystem=xdg-documents
-  - --filesystem=xdg-music
-  - --filesystem=xdg-videos
-  - --filesystem=xdg-pictures:ro
+  - --filesystem=home
   - --filesystem=/media
   - --filesystem=/run/media
   - --filesystem=xdg-run/gvfs

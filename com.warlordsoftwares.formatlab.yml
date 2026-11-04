@@ -21,10 +21,7 @@ finish-args:
   - --socket=wayland
   - --socket=pulseaudio
   - --device=all
-  - --filesystem=xdg-download
-  - --filesystem=xdg-documents
-  - --filesystem=xdg-music
-  - --filesystem=xdg-videos
+  - --filesystem=home
   - --filesystem=/media
   - --filesystem=/run/media
   - --filesystem=xdg-run/gvfs
@@ -147,7 +144,7 @@ modules:
     sources:
       - type: archive
         url: https://warlordsoftwares.com/static/app_builds/flatpak/FLATPAK_FORMAT_LAB.tar.gz
-        sha256: b01792c5ca7aafdc2308babb47ae1829cccb6dfdbd83c232af1c7ace5dc008e6
+        sha256: a245fcea3c188ef32f474835af063bbc25c002f56ded782f98085ace5091188a
 
 
 

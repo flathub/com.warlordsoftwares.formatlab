@@ -80,6 +80,7 @@ modules:
         sha256: abbdcbd39555691dd1c9b4d08f0a031376a3b211652c0d8b3b8aa9be1303ce2d
         x-checker-data:
           type: anitya
+          is-important: true
           project-id: 14474
           url-template: https://downloads.xvid.com/downloads/xvidcore-$version.tar.gz
 
